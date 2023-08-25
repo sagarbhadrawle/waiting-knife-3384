@@ -23,6 +23,8 @@ public class Main {
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_PINK = "\u001B[38;5;206m";
 	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_ORANGE = "\u001B[38;5;208m";
+
 
 	
 	public static void main(String[] args) {
@@ -198,7 +200,7 @@ public class Main {
 			System.out.println();
 			System.out.println(ANSI_GREEN+"**********************************************************************"+ANSI_RESET);
 			System.out.println(
-					ANSI_RESET + ANSI_BLUE + "Welcome " + serviceProvider.getName() + " Happy to see you again" + ANSI_RESET);
+					ANSI_RESET + ANSI_ORANGE + "Welcome " + serviceProvider.getName() + " Happy to see you again" + ANSI_RESET);
 			System.out.println(ANSI_GREEN+"************************************************************************"+ANSI_RESET);
 			ServiceProviderMain.ServiceProviderRole(sc, serviceProvider);
 			

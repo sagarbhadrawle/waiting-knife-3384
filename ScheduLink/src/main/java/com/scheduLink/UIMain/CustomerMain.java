@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.scheduLink.entity.Appointment;
 import com.scheduLink.entity.Customer;
+import com.scheduLink.entity.Feedback;
 import com.scheduLink.entity.Service;
 import com.scheduLink.entity.ServiceProvider;
 import com.scheduLink.entity.ServiceSlot;
@@ -38,6 +39,8 @@ public class CustomerMain {
 			System.out.println("Enter:-4 For Cancel the appointment");
 			System.out.println("Enter:-5 For Search the appointment by id");
 			System.out.println("Enter:-6 For Search service provider by username");
+			System.out.println("Enter:-7 Providing Feedback to Service provider");
+			
 			System.out.println("Enter:-0 For Logout" + ANSI_RESET);
 			System.out.print(ANSI_YELLOW + "Enter Your Choice:- " + ANSI_RESET);
 			try {
@@ -48,11 +51,12 @@ public class CustomerMain {
 			}
 			switch (choice) {
 			case 1 -> viewService(sc);
-			case 2 -> bookAppoi(sc, customer);
-//			case 3 -> viewAppoi(sc, customer);
-//			case 4 -> cancelAppoi(sc, customer);
-//			case 5 -> searchAppoi(sc, customer);
-//			case 6 -> searchsp(sc);
+			case 2 -> bookAppointment(sc, customer);
+			case 3 -> viewAppointment(sc, customer);
+			case 4 -> cancelAppointment(sc, customer);
+			case 5 -> searchAppointment(sc, customer);
+			case 6 -> searchServiceProvider(sc);
+			case 7 -> provideFeedback(sc,customer);
 			case 0 -> {
 				isTrue = false;
 				System.out.println();
@@ -91,7 +95,7 @@ public class CustomerMain {
 		
 	}
 	
-	public static void bookAppoi(Scanner sc,Customer customer)
+	public static void bookAppointment(Scanner sc,Customer customer)
 	{
 		viewService(sc);
 		System.out.println( ANSI_GREEN + "Enter Service Provider UserName From above in which you want to book appoinment :- ");
@@ -124,9 +128,9 @@ public class CustomerMain {
 			
 			System.out.println(ANSI_YELLOW+"Enter slot id:- "+ANSI_RESET);
 			
-			int slot = sc.nextInt();
+			int slotid = sc.nextInt();
 			
-			ServiceSlot validSlot = ps.findValidSlot(slot);
+			ServiceSlot validSlot = ps.findValidSlot(slotid);
 			
 			if(validSlot.getIsAvailabe().equals("yes"))
 			{
@@ -171,7 +175,136 @@ public class CustomerMain {
 		
 	}
 	
+	public static void viewAppointment(Scanner sc, Customer customer)
+	{
+		
+		String query = "Select a from Appointment a  where a.customer = :id";
+		
+		ProjectService projectService = new ProjectServiceImpl();
+		
+		try {
+			
+			List<Appointment> showAppoitment  = projectService.showAppointment(customer, query);
+			
+			if(showAppoitment.size()==0)
+			{
+				throw new NoRecordFoundException(ANSI_RED+"No Appoinment was Booked!"+ANSI_RESET);
+				
+			}
+			else {
+				showAppoitment.forEach(a -> {
+					System.out.print(ANSI_BLUE+a+", Service Provider= "+a.getServiceProvider().getName()+", Response At:- ");
+					System.out.print(a.getResponse_at()==null?"No Response":a.getResponse_at());
+					System.out.print(" ] \n"+ANSI_RESET);
+					});
+				
+			}
+			
+		} catch  (SomethingWentWrongException|NoRecordFoundException e) {
+			System.out.println(ANSI_RED+e.getMessage()+ANSI_RESET);
+		}
+		
+		
+	}
 	
+	
+	public static void cancelAppointment(Scanner sc , Customer cusotmer)
+	{ 	
+		String query = "SELECT A from  Appointment A WHERE A.customer=:id";
+		ProjectService projectService = new ProjectServiceImpl();
+		
+		try {
+			
+			List<Appointment> showAppoitment = projectService.showAppointment(cusotmer, query);
+			
+			if(showAppoitment.size()==0)
+			{
+				throw new NoRecordFoundException(ANSI_RED+"No Appoinment was Booked!"+ANSI_RESET);
+			}
+			else {
+				showAppoitment.forEach(a -> System.out.println(a));
+			}
+			System.out.print(ANSI_YELLOW+"Enter Appoinment ID From above which You Want to Cancel :- ");
+			
+			int aId=sc.nextInt();
+			Appointment appointment  = projectService.findAppointment(aId);
+			
+			projectService.cancelAppointment(appointment);
+			
+			System.out.println(ANSI_RESET+ANSI_BLUE+"Appoinment Cancelled SucessFully!"+ANSI_RESET);
+			
+		} catch (SomethingWentWrongException|NoRecordFoundException e) {
+			System.out.println(ANSI_RED+e.getMessage()+ANSI_RESET);
+		}
+	}
 
+	
+	public static void searchAppointment(Scanner sc , Customer customer)
+	{
+		
+		System.out.print("Enter Appoinment id which you want to search:- ");
+		int id = sc.nextInt();
+		ProjectService ps = new ProjectServiceImpl();
+		try {
+			Appointment appoinment = ps.findAppointment(id);
+			System.out.println(appoinment);
+		} catch (NoRecordFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public static void searchServiceProvider(Scanner sc) {
+		System.out.print("Enter Service Provider username which you want to search:- ");
+		String username = sc.next();
+		ProjectService ps = new ProjectServiceImpl();
+		try {
+			ServiceProvider sp = ps.findServiceProvider(username);
+			System.out.println(sp);
+		}  catch (NoRecordFoundException e) {
+			System.out.println(e.getMessage());
+		}	
+	}
+	
+	
+	public static void provideFeedback(Scanner sc , Customer customer)
+	{
+		ProjectService ps  = new ProjectServiceImpl();
+		String query = "SELECT s from ServiceProvider s";
+		try {
+			List<ServiceProvider> service =  ps.viewServiceProviders(query);
+			
+			service.forEach(s->System.out.println(s));
+			
+			
+			System.out.println("Enter Service Provider Username");
+			sc.nextLine();
+			String username = sc.nextLine();
+			ServiceProvider service1  = ps.findServiceProvider(username); 
+			
+			
+			
+			System.out.println("Enter Rating");
+			int rating = sc.nextInt();
+			
+			sc.nextLine();
+			System.out.println("Provide you Experience in detail");
+			String exper = sc.nextLine();
+			
+			
+			Feedback fb =  new Feedback(customer,service1,rating,exper);
+			
+			
+			ps.provideFeedback(fb);
+			
+			
+			
+		} catch (SomethingWentWrongException | NoRecordFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
 	
 }

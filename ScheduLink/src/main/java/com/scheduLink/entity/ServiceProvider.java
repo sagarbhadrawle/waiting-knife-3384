@@ -24,7 +24,9 @@ public class ServiceProvider {
 	
 	@OneToMany(mappedBy = "serviceProvider",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	List<Appointment> appoinments= new ArrayList<>();
-
+	
+	
+	
 	public ServiceProvider() {
 		super();
 	}

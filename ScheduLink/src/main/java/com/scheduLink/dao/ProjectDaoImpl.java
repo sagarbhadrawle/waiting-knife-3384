@@ -1,9 +1,11 @@
 package com.scheduLink.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.scheduLink.entity.Appointment;
 import com.scheduLink.entity.Customer;
+import com.scheduLink.entity.Feedback;
 import com.scheduLink.entity.Service;
 import com.scheduLink.entity.ServiceProvider;
 import com.scheduLink.entity.ServiceSlot;
@@ -176,7 +178,7 @@ public class ProjectDaoImpl implements ProjectDao {
 			Query q = em.createQuery(query);
 			
 			service = q.getResultList();
-			
+			 
 			
 			
 		} catch (Exception e) {
@@ -193,21 +195,88 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@Override
 	public void addService(Service service) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
-
+		EntityManager em = DBUitiles.getConnection();
+		EntityTransaction et = em.getTransaction();
+		try {
+			et.begin();
+			em.persist(service);
+			et.commit();
+		} catch (Exception e) {
+			throw new SomethingWentWrongException("Unable To add Service");
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
 	public void bookAppointment(ServiceSlot validSlot, ServiceProvider serviceProviders)
 			throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
+		EntityManager em = null;
+		EntityTransaction et = null;
+		try {
+			em = DBUitiles.getConnection();
+			et = em.getTransaction();
+			et.begin();
+			validSlot.setIsAvailabe("no");;
+			em.merge(serviceProviders);
+			em.merge(validSlot);
+			et.commit();
+			
+		} catch (Exception e) {
+			
+			if(et!=null)
+			{
+				et.rollback();
+			}
+			System.out.println(e.getMessage());
+			throw new SomethingWentWrongException("Unable to Book Appointment");
+			
+		}finally {
+			if(em!=null)
+			{
+				em.close();
+			}
+		}
+		
 
 	}
 
 	@Override
 	public void cancelAppointment(Appointment Appointment) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
-
+		
+		EntityManager em = null;
+		EntityTransaction et = null;
+		try {
+			em= DBUitiles.getConnection();
+			et = em.getTransaction();
+			et.begin();
+			int slot_id = Appointment.getSlotID();
+			
+			ServiceSlot serviceSlot = em.find(ServiceSlot.class, slot_id);
+			
+			serviceSlot.setIsAvailabe("yes");
+			
+//			em.persist(serviceSlot);
+			em.merge(serviceSlot);
+			
+			String query = "DELETE from Appointment a where a.appoinmentId = : id";
+			Query query2 = em.createQuery(query);
+			
+			query2.setParameter("id", Appointment.getAppoinmentId());
+			
+			query2.executeUpdate();
+			
+			et.commit();
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+			throw new SomethingWentWrongException("Unable to Cancel Appointment");
+		}
+		finally {
+			em.close();
+		}
+		
 	}
 
 	@Override
@@ -237,20 +306,110 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@Override
 	public void giveService(Appointment ap, String status) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
-
+	
+		EntityManager em = null;
+		EntityTransaction et = null;
+		try {
+			em = DBUitiles.getConnection();
+			et = em.getTransaction();
+			et.begin();
+			ap.setStatus(status);
+			ap.setResponse_at(LocalDateTime.now());
+			em.merge(ap);
+			et.commit();
+		} catch (Exception e) {
+			throw new SomethingWentWrongException("Unable to Updated Status");
+		}
+		
 	}
 
 	@Override
 	public List<Service> viewServices(ServiceProvider serviceProvider) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Service> service = null;
+		EntityManager em  = null;
+		
+		try {
+			em = DBUitiles.getConnection();
+			String query= "select s from Service s where s.sp=:sProvider";
+			
+			Query query2 = em.createQuery(query);
+			query2.setParameter("sProvider", serviceProvider);
+			service = query2.getResultList();
+			
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+			throw new SomethingWentWrongException("Unable to Get Services!");
+		}
+		
+		return service;
 	}
 
 	@Override
 	public void addServiceSlot(Service service) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
+		EntityManager em = DBUitiles.getConnection();
+		EntityTransaction et = em.getTransaction();
+		try {
+			et.begin();
+			em.merge(service);
+			et.commit();
+			
+			System.out.println("Slot added successfully");
+		} catch (Exception e) {
+			throw new SomethingWentWrongException("Unable To add Service");
+		} finally {
+			em.close();
+		}
 
+	}
+
+	@Override
+	public void provideFeedback(Feedback fb) throws SomethingWentWrongException {
+		EntityManager em = DBUitiles.getConnection();
+		EntityTransaction et = em.getTransaction();
+		try {
+			et.begin();
+		
+			
+			em.persist(fb);
+			et.commit();
+			
+			System.out.println("Provide feedback successfully");
+		} catch (Exception e) {
+			et.rollback();
+			throw new SomethingWentWrongException("Unable To provide feedback");
+		} finally {
+			em.close();
+		}
+		
+	}
+
+	@Override
+	public Feedback viewFeedback(String query, ServiceProvider usernmae)
+			throws SomethingWentWrongException, NoRecordFoundException {
+		
+		EntityManager em = DBUitiles.getConnection();
+		
+		Feedback fb =null;
+		try {
+			
+			Query q = em.createQuery(query);
+			q.setParameter("username", usernmae);
+			
+			fb = (Feedback) q.getSingleResult();
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			throw new SomethingWentWrongException(e.getMessage());
+		} finally {
+			em.close();
+		}
+		
+		return fb;
 	}
 
 }

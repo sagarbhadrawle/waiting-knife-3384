@@ -16,11 +16,30 @@ public class Feedback {
 	
 	@OneToOne
 	@JoinColumn(name = "customer_id")
-	private Customer customer_id;
+	private Customer customer;
+	
+	@OneToOne
+	@JoinColumn(name="service_providerId")
+	private ServiceProvider service ;
+	
+	
+	
+	
 	private int rating;
 	private String comment;
+	
+	
 
 	
+	public Feedback(Customer customer_id, ServiceProvider service, int rating, String comment) {
+		super();
+		this.customer = customer_id;
+		this.service = service;
+		this.rating = rating;
+		this.comment = comment;
+	}
+
+
 	public Feedback() {
 		// TODO Auto-generated constructor stub
 	}
@@ -37,12 +56,12 @@ public class Feedback {
 
 
 	public Customer getCustomer_id() {
-		return customer_id;
+		return customer;
 	}
 
 
 	public void setCustomer_id(Customer customer_id) {
-		this.customer_id = customer_id;
+		this.customer = customer_id;
 	}
 
 
@@ -68,7 +87,7 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "Feedback [feedback_id=" + feedback_id + ", customer_id=" + customer_id + ", rating=" + rating
+		return "Feedback [feedback_id=" + feedback_id + "rating=" + rating
 				+ ", comment=" + comment + "]";
 	}
 	

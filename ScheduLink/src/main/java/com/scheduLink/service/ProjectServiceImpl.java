@@ -2,10 +2,12 @@ package com.scheduLink.service;
 
 import java.util.List;
 
+import com.mysql.cj.xdevapi.DbDoc;
 import com.scheduLink.dao.ProjectDao;
 import com.scheduLink.dao.ProjectDaoImpl;
 import com.scheduLink.entity.Appointment;
 import com.scheduLink.entity.Customer;
+import com.scheduLink.entity.Feedback;
 import com.scheduLink.entity.Service;
 import com.scheduLink.entity.ServiceProvider;
 import com.scheduLink.entity.ServiceSlot;
@@ -64,8 +66,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void addService(Service service) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
-
+		ProjectDao projectDao = new ProjectDaoImpl();
+		projectDao.addService(service);
 	}
 
 	@Override
@@ -128,10 +130,10 @@ public class ProjectServiceImpl implements ProjectService {
 			
 			if(slot==null)
 			{
-				throw new NoRecordFoundException("Service With Given Title Not Available");	
+				throw new NoRecordFoundException("Given Service Slot Not Available");	
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			throw new NoRecordFoundException("Given Service Slot Not Available");
 		}
 		finally {
 			em.close();
@@ -144,25 +146,64 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void bookAppointment(ServiceSlot validSlot, ServiceProvider sp) throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
+		ProjectDao projectDao = new ProjectDaoImpl();
+		projectDao.bookAppointment(validSlot, sp);
 
 	}
 
 	@Override
 	public List<Appointment> showAppointment(Customer customer, String query)
 			throws SomethingWentWrongException, NoRecordFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = null;
+		List<Appointment> appintments =null;
+		
+		try {
+			
+			em = DBUitiles.getConnection();
+			Query q = em.createQuery(query);
+			q.setParameter("id", customer);
+			appintments =(List<Appointment>)q.getResultList();
+			
+		}
+		catch(Exception e)
+		{
+			throw new NoRecordFoundException("Something Went Wrong Please Try Again");
+		}
+		finally {
+			em.close();
+		}
+		
+		return appintments;
 	}
 
 	@Override
 	public Appointment findAppointment(int id) throws NoRecordFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = null;
+		Appointment appoint = null;
+		try {
+			em= DBUitiles.getConnection();
+			
+			appoint = em.find(Appointment.class, id);
+			
+			if(appoint ==null)
+			{
+				throw new NoRecordFoundException("Service With Given Title Not Available");	
+			}
+		} catch (Exception e) {
+			throw new NoRecordFoundException("Something Went Wrong Please Try Again");
+		}
+		finally {
+			em.close();
+		}
+		
+		
+		return appoint;
 	}
 
 	@Override
 	public void cancelAppointment(Appointment Appointment) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
+		ProjectDao projectDao = new ProjectDaoImpl();
+		projectDao.cancelAppointment(Appointment);	
 
 	}
 
@@ -176,20 +217,38 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public void giveService(Appointment ap, String status) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
+		ProjectDao projectDao = new ProjectDaoImpl();
+		projectDao.giveService(ap,status);
+		
 
 	}
 
 	@Override
 	public List<Service> viewServices(ServiceProvider serviceProvider) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
-		return null;
+		ProjectDao projectDao = new ProjectDaoImpl();
+		return projectDao.viewServices(serviceProvider);
 	}
 
 	@Override
 	public void addServiceSlot(Service service) throws SomethingWentWrongException {
-		// TODO Auto-generated method stub
+		ProjectDao projectDao = new ProjectDaoImpl();
+		projectDao.addServiceSlot(service);
+	}
 
+	@Override
+	public void provideFeedback(Feedback fb) throws SomethingWentWrongException {
+		ProjectDao projectDao = new ProjectDaoImpl();
+		projectDao.provideFeedback(fb);
+		
+	}
+
+	@Override
+	public Feedback viewFeedback(String query, ServiceProvider usernmae)
+			throws SomethingWentWrongException, NoRecordFoundException {
+		ProjectDao projectDao = new ProjectDaoImpl();
+		
+		
+		return projectDao.viewFeedback(query, usernmae);
 	}
 
 }
