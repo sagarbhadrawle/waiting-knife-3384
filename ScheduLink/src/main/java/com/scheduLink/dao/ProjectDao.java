@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.scheduLink.entity.Appointment;
 import com.scheduLink.entity.Customer;
+import com.scheduLink.entity.Feedback;
 import com.scheduLink.entity.Service;
 import com.scheduLink.entity.ServiceProvider;
 import com.scheduLink.entity.ServiceSlot;
@@ -24,5 +25,7 @@ public interface ProjectDao {
 	 public void giveService(Appointment ap,String status) throws SomethingWentWrongException ;
 	public List<Service> viewServices(ServiceProvider serviceProvider) throws SomethingWentWrongException;
 	public void addServiceSlot(Service service) throws SomethingWentWrongException;
-
+	 public Feedback viewFeedback(String query,ServiceProvider usernmae) throws SomethingWentWrongException,NoRecordFoundException;
+	public void provideFeedback(Feedback fb) throws SomethingWentWrongException;
+	
 }

@@ -133,9 +133,7 @@ public class Appointment {
 	@Override
 	public String toString() {
 		return "Appointment [appoinmentId=" + appoinmentId + ", customerName=" + customerName + ", serviceName="
-				+ serviceName + ", slot=" + slot + ", slotID=" + slotID + ", status=" + status + ", booked_at="
-				+ booked_at + ", response_at=" + response_at + ", customer=" + customer + ", serviceProvider="
-				+ serviceProvider + "]";
+				+ serviceName + ", slot=" + slot + ", slotID=" + slotID + ", status=" + status  +"]"; 
 	}
 	
 	
