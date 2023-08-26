@@ -2,7 +2,7 @@
 
 Book My Slot is a console-based appointment scheduling system designed to streamline the process of scheduling appointments between customers and service providers. This software application aims to provide a convenient and efficient platform for managing appointments, reducing scheduling conflicts, and enhancing customer satisfaction
 #
-![logo](https://github-production-user-asset-6210df.s3.amazonaws.com/121329077/245686650-04c91db5-684f-4bc4-a663-9ac52108b7e5.png)
+
 ## Types of Users
 - Customer/Client: The customers are the end-users of the system who want to schedule appointments with service providers. They can view service provider profiles, book appointments, cancel appointments, and provide feedback.
 
@@ -58,4 +58,3 @@ Book My Slot uses a relational database (MySQL) to store information related to 
 
 ## Authors
 
-- [@Shivam6209](https://www.github.com/Shivam6209)
