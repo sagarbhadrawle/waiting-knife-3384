@@ -1,6 +1,6 @@
 # ScheduLink - Appointment Scheduling System
 
-Book My Slot is a console-based appointment scheduling system designed to streamline the process of scheduling appointments between customers and service providers. This software application aims to provide a convenient and efficient platform for managing appointments, reducing scheduling conflicts, and enhancing customer satisfaction
+ScheduLink is a console-based appointment scheduling system designed to streamline the process of scheduling appointments between customers and service providers. This software application aims to provide a convenient and efficient platform for managing appointments, reducing scheduling conflicts, and enhancing customer satisfaction
 #
 
 ## Types of Users
@@ -10,7 +10,7 @@ Book My Slot is a console-based appointment scheduling system designed to stream
 
 
 ## Features
- The Book My Slot system provides the following features:
+ The ScheduLink system provides the following features:
 
 ### For Customers/Clients:
 - Register for a customer account by providing necessary information.
@@ -20,6 +20,7 @@ Book My Slot is a console-based appointment scheduling system designed to stream
 - Book the appointment without waiting for confirmation.
 - Cancel the appointment.
 - Search Service Provider By User Name.
+- Give Feedback to Service Provider.
 - Log out from the customer account.
 
 ### For Service Providers:
@@ -30,13 +31,14 @@ Book My Slot is a console-based appointment scheduling system designed to stream
 - View appointment details, including customer information and appointment time.
 - Open available slots for customers to book appointments.
 - Search Appoinment by appoinment id.
+- View Feedback.
 - Log out from the service provider account.
   
 ## ER Diagram
 ![logo](https://github.com/Shivam6209/soft-jelly-7030/assets/121329077/d5df0b13-2a44-4ba3-99bd-da95ebd10720)
 
 ## Technologies Used
-- The Book My Slot project utilizes the following technologies and frameworks:
+- The ScheduLink  project utilizes the following technologies and frameworks:
 - Java: Programming language for implementing the system's functionality.
 - MySQL: Database management system for storing and retrieving data.
 - Hibernate: Object-Relational Mapping (ORM) framework for seamless integration between the application and the database.
@@ -44,7 +46,7 @@ Book My Slot is a console-based appointment scheduling system designed to stream
 - GitHub: Hosting platform for version control and repository management.
 
 ## Installation
-To install and run Book My Slot locally, please follow these steps:
+To install and run ScheduLink locally, please follow these steps:
 
  1. Clone the repository:
  2. Install the necessary dependencies.
@@ -54,7 +56,7 @@ To install and run Book My Slot locally, please follow these steps:
  4. Compile and run the application.
 
 ## Database Design
-Book My Slot uses a relational database (MySQL) to store information related to customers, service providers, appointments, customer feedback, and service details. The database design includes appropriate relationships and constraints, such as foreign keys and unique constraints. To visualize the database structure and relationships, refer to the ER-Diagram provided in the project.
+ScheduLink uses a relational database (MySQL) to store information related to customers, service providers, appointments, customer feedback, and service details. The database design includes appropriate relationships and constraints, such as foreign keys and unique constraints. To visualize the database structure and relationships, refer to the ER-Diagram provided in the project.
 
 ## Authors
-
+@sagarbhadrawle
