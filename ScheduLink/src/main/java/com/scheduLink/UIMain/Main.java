@@ -28,12 +28,7 @@ public class Main {
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_ORANGE = "\u001B[38;5;208m";
 	
-	
-	
-	    
-	    
-	    
-	    
+ 
 	public static void main(String[] args) {
 		
 		
