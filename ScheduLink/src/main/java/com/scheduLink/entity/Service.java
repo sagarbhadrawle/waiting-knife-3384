@@ -70,7 +70,14 @@ public class Service {
 
 	@Override
 	public String toString() {
-		return "Service [Title=" + s_title + ", Description=" + s_desc + "]\n" + serviceSlots + "\n";
+		return String.format("Service [s_title=%s, s_desc=%s, sp=%s, serviceSlots=%s]", s_title, s_desc, sp,
+				serviceSlots);
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Service [Title=" + s_title + ", Description=" + s_desc + "]\n" + serviceSlots + "\n";
+//	}
+
+	
 }

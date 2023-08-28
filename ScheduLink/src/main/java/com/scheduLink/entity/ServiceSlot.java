@@ -56,10 +56,17 @@ public class ServiceSlot {
 	public int getId() {
 		return id;
 	}
+//
+//	@Override
+//	public String toString() {
+//		return "ServiceSlot [slotId= "+id+", slotTime=" + slot_time + ", Availabe=" + isAvailabe;
+//	}
 
 	@Override
 	public String toString() {
-		return "ServiceSlot [slotId= "+id+", slotTime=" + slot_time + ", Availabe=" + isAvailabe;
+		return String.format("ServiceSlot [id=%s, slot_time=%s, isAvailabe=%s]", id, slot_time, isAvailabe);
 	}
-
+	
+	
+	
 }
