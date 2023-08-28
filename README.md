@@ -5,6 +5,11 @@ ScheduLink is a console-based appointment scheduling system designed to streamli
 
 ![logo](https://raw.githubusercontent.com/sagarbhadrawle/waiting-knife-3384/main/ScheduLink/Logo%26screenShots/Black%20White%20Elegant%20Monogram%20Initial%20Name%20Logo.png)
 
+# ScreenShots
+![logo](https://raw.githubusercontent.com/sagarbhadrawle/waiting-knife-3384/main/ScheduLink/Logo%26screenShots/customerSide.jpg)
+
+![logo](https://raw.githubusercontent.com/sagarbhadrawle/waiting-knife-3384/main/ScheduLink/Logo%26screenShots/admin_side.jpg)
+
 ## Types of Users
 - Customer/Client: The customers are the end-users of the system who want to schedule appointments with service providers. They can view service provider profiles, book appointments, cancel appointments, and provide feedback.
 
