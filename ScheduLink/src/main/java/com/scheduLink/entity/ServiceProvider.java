@@ -89,8 +89,15 @@ public class ServiceProvider {
 
 	@Override
 	public String toString() {
-		return "ServiceProvider [username="+ username +", name=" + name + ", email=" + email + "] \n" +services;
+		return String.format(
+				"ServiceProvider [username=%s, name=%s, email=%s]", username,
+				name, email);
 	}
+
+//	@Override
+//	public String toString() {
+//		return "ServiceProvider [username="+ username +", name=" + name + ", email=" + email + "] \n" +services;
+//	}
 
 	
 

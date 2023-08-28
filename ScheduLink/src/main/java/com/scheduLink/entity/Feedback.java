@@ -87,10 +87,18 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "Feedback [feedback_id=" + feedback_id + "rating=" + rating
-				+ ", comment=" + comment + "]";
+		return String.format("Feedback [feedback_id=%s, customer=%s, service=%s, rating=%s, comment=%s]", feedback_id,
+				customer, service, rating, comment);
 	}
+
+
+//	@Override
+//	public String toString() {
+//		return "Feedback [feedback_id=" + feedback_id + "rating=" + rating
+//				+ ", comment=" + comment + "]";
+//	}
 	
+
 	
 
 }
