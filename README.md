@@ -2,6 +2,8 @@
 
 ScheduLink is a console-based appointment scheduling system designed to streamline the process of scheduling appointments between customers and service providers. This software application aims to provide a convenient and efficient platform for managing appointments, reducing scheduling conflicts, and enhancing customer satisfaction
 #
+#
+![logo](ScheduLink/Logo&screenShots/Black White Elegant Monogram Initial Name Logo.png)
 
 ## Types of Users
 - Customer/Client: The customers are the end-users of the system who want to schedule appointments with service providers. They can view service provider profiles, book appointments, cancel appointments, and provide feedback.
