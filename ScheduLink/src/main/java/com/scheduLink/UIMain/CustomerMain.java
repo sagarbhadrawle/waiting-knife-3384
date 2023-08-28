@@ -25,6 +25,8 @@ public class CustomerMain {
 	public static final String ANSI_BLUE = "\u001B[35m";
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_CREAM = "\u001B[93;40m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_LIGHT_GRAY = "\u001B[37m";
 
 	
 	public static int  x =1;
@@ -33,7 +35,7 @@ public class CustomerMain {
 		boolean isTrue = true;
 		int choice = 0;
 		do {
-			System.out.println(ANSI_CREAM + "Enter:-1 For View service provider profiles, and Other Info");
+			System.out.println(ANSI_CYAN + "Enter:-1 For View service provider profiles, and Other Info");
 			System.out.println("Enter:-2 For Book the appointment");
 			System.out.println("Enter:-3 For View all appointment");
 			System.out.println("Enter:-4 For Cancel the appointment");
@@ -193,7 +195,7 @@ public class CustomerMain {
 			}
 			else {
 				showAppoitment.forEach(a -> {
-					System.out.print(ANSI_BLUE+a+", Service Provider= "+a.getServiceProvider().getName()+", Response At:- ");
+					System.out.print(ANSI_LIGHT_GRAY+a+", Service Provider= "+a.getServiceProvider().getName()+", Response At:- ");
 					System.out.print(a.getResponse_at()==null?"No Response":a.getResponse_at());
 					System.out.print(" ] \n"+ANSI_RESET);
 					});
@@ -231,7 +233,7 @@ public class CustomerMain {
 			
 			projectService.cancelAppointment(appointment);
 			
-			System.out.println(ANSI_RESET+ANSI_BLUE+"Appoinment Cancelled SucessFully!"+ANSI_RESET);
+			System.out.println(ANSI_RESET+ANSI_LIGHT_GRAY+"Appoinment Cancelled SucessFully!"+ANSI_RESET);
 			
 		} catch (SomethingWentWrongException|NoRecordFoundException e) {
 			System.out.println(ANSI_RED+e.getMessage()+ANSI_RESET);

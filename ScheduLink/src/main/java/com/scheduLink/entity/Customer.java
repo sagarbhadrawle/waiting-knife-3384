@@ -98,10 +98,18 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customer_id=" + customer_id + ", username=" + username + ", password=" + password
-				+ ", full_name=" + full_name + ", email=" + email + ", phone_number=" + phone_number + ", appoinment="
-				+ appoinment + "]";
+		return String.format(
+				"Customer [customer_id=%s, username=%s, password=%s, full_name=%s, email=%s, phone_number=%s, appoinment=%s]",
+				customer_id, username, password, full_name, email, phone_number, appoinment);
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Customer [customer_id=" + customer_id + ", username=" + username + ", password=" + password
+//				+ ", full_name=" + full_name + ", email=" + email + ", phone_number=" + phone_number + ", appoinment="
+//				+ appoinment + "]";
+//	}
+	
 	
 	
 	
