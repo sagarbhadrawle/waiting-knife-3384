@@ -42,7 +42,7 @@ ScheduLink is a console-based appointment scheduling system designed to streamli
 - Log out from the service provider account.
   
 ## ER Diagram
-![logo](https://github.com/Shivam6209/soft-jelly-7030/assets/121329077/d5df0b13-2a44-4ba3-99bd-da95ebd10720)
+![logo](https://raw.githubusercontent.com/sagarbhadrawle/waiting-knife-3384/main/ScheduLink/Logo%26screenShots/diagram.png)
 
 ## Technologies Used
 - The ScheduLink  project utilizes the following technologies and frameworks:
