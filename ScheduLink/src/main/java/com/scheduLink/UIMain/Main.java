@@ -9,7 +9,10 @@ import com.scheduLink.exception.NoRecordFoundException;
 import com.scheduLink.exception.SomethingWentWrongException;
 import com.scheduLink.service.ProjectService;
 import com.scheduLink.service.ProjectServiceImpl;
+
 import com.scheduLink.utility.DBUitiles;
+
+
 
 import jakarta.persistence.EntityManager;
 
@@ -24,10 +27,17 @@ public class Main {
 	public static final String ANSI_PINK = "\u001B[38;5;206m";
 	public static final String ANSI_BLACK = "\u001B[30m";
 	public static final String ANSI_ORANGE = "\u001B[38;5;208m";
-
-
 	
+	
+	
+	    
+	    
+	    
+	    
 	public static void main(String[] args) {
+		
+		
+		
 		
 		Scanner sc = new Scanner(System.in);
 		EntityManager em  = DBUitiles.getConnection();

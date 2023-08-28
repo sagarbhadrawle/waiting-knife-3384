@@ -129,12 +129,20 @@ public class Appointment {
 		this.customer = customer;
 		this.serviceProvider = serviceProvider;
 	}
+//
+//	@Override
+//	public String toString() {
+//		return "Appointment [appoinmentId=" + appoinmentId + ", customerName=" + customerName + ", serviceName="
+//				+ serviceName + ", slot=" + slot + ", slotID=" + slotID + ", status=" + status  +"]"; 
+//	}
 
 	@Override
 	public String toString() {
-		return "Appointment [appoinmentId=" + appoinmentId + ", customerName=" + customerName + ", serviceName="
-				+ serviceName + ", slot=" + slot + ", slotID=" + slotID + ", status=" + status  +"]"; 
+		return String.format(
+				"Appointment [appoinmentId=%s, customerName=%s, serviceName=%s, slot=%s, slotID=%s, status=%s]",
+				appoinmentId, customerName, serviceName, slot, slotID, status);
 	}
+	
 	
 	
 	
