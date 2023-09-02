@@ -65,7 +65,7 @@ To install and run ScheduLink locally, please follow these steps:
 ## Database Design
 ScheduLink uses a relational database (MySQL) to store information related to customers, service providers, appointments, customer feedback, and service details. The database design includes appropriate relationships and constraints, such as foreign keys and unique constraints. To visualize the database structure and relationships, refer to the ER-Diagram provided in the project.
 
-##Acknowledgments
+## Acknowledgments
 -[Java Documentation](https://docs.oracle.com/en/java/)
 
 ## Authors
